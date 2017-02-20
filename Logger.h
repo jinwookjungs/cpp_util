@@ -1,7 +1,7 @@
 /**
  * @file    Logger.h
  * @author  Jinwook Jung (jinwookjungs@gmail.com)
- * @date    2017-02-19 23:21:50
+ * @date    2017-02-20 01:07:43
  *
  * Created on Sat Feb 18 20:07:06 2017.
  */
