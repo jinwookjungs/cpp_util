@@ -73,29 +73,15 @@ namespace my_log {
                 return lc;
             }
 
-            static std::ostream& get_os()
-            {
-                return LoggerCtrl::get().os_;
-            }
+            static std::ostream& get_os()         { return LoggerCtrl::get().os_; }
+            static std::string& get_header()      { return LoggerCtrl::get().header_; }
+            static Verbosity& get_max_verbosity() { return LoggerCtrl::get().max_verbosity_; }
 
-            static std::string& get_header()
-            {
-                return LoggerCtrl::get().header_;
+            static void set_header(std::string header) { 
+                LoggerCtrl::get().header_ = header; 
             }
-
-            static void set_header(std::string header)
-            {
-                LoggerCtrl::get().header_ = header;
-            }
-
-            static Verbosity& get_max_verbosity()
-            {
-                return LoggerCtrl::get().max_verbosity_;
-            }
-
-            static void set_max_verbosity(const Verbosity& v)
-            {
-                LoggerCtrl::get().max_verbosity_ = v;
+            static void set_max_verbosity(const Verbosity& v) { 
+                LoggerCtrl::get().max_verbosity_ = v; 
             }
     };
 
