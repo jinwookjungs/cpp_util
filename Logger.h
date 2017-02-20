@@ -10,8 +10,11 @@
 #define LOGGER_H 
 
 #include <iostream>
+#include <fstream>
 #include <string>
-
+#include <vector>
+#include <algorithm>
+#include <functional>
 
 //-----------------------------------------------------------------------------
 // Logging macros
@@ -54,15 +57,57 @@ namespace my_log {
 
 
     /**
+     * An output stream that redirects the data to multiple streams.
+     */
+    class OutStream : public std::ostream
+    {
+        private:
+            class StreamBuffer : public std::streambuf
+            {
+                private:
+                    std::vector<std::streambuf*> bufs_;
+                
+                public:
+                    void add_buffer (std::streambuf* buf) { 
+                        bufs_.push_back(buf); 
+                    }
+                    virtual int overflow(int c)
+                    {
+                        std::for_each(bufs_.begin(), 
+                                      bufs_.end(),
+                                      std::bind2nd(std::mem_fun(&std::streambuf::sputc), c));
+                        return c;
+                    }
+            };  
+
+            StreamBuffer buffer_;
+
+        public: 
+            OutStream() : std::ostream(nullptr) { 
+                std::ostream::rdbuf(&buffer_); 
+            }
+
+            void add_stream(std::ostream& os) 
+            {
+                os.flush();
+                buffer_.add_buffer(os.rdbuf());
+            }
+    };
+
+
+    /**
      * Maximum verbosity of the Logger.
      */
     class LoggerCtrl 
     {
-            std::ostream& os_;
+        private:
+            OutStream os_;
             std::string header_;
             Verbosity max_verbosity_;
 
-            LoggerCtrl() : os_(std::cout), header_(""), max_verbosity_(Verbosity::debug) {}
+            LoggerCtrl() : os_(), header_(""), max_verbosity_(Verbosity::debug) {
+                os_.add_stream(std::cout);
+            }
             LoggerCtrl(const LoggerCtrl& lc) = delete;
             LoggerCtrl& operator=(const LoggerCtrl& lc) = delete;
 
@@ -73,15 +118,23 @@ namespace my_log {
                 return lc;
             }
 
-            static std::ostream& get_os()         { return LoggerCtrl::get().os_; }
+            static OutStream& get_os()            { return LoggerCtrl::get().os_; }
             static std::string& get_header()      { return LoggerCtrl::get().header_; }
             static Verbosity& get_max_verbosity() { return LoggerCtrl::get().max_verbosity_; }
 
-            static void set_header(std::string header) { 
+            static void set_header(std::string header) 
+            { 
                 LoggerCtrl::get().header_ = header; 
             }
-            static void set_max_verbosity(const Verbosity& v) { 
+
+            static void set_max_verbosity(const Verbosity& v) 
+            {
                 LoggerCtrl::get().max_verbosity_ = v; 
+            }
+
+            static void add_stream(std::ostream& os)
+            {
+                LoggerCtrl::get().os_.add_stream(os);
             }
     };
 
@@ -93,7 +146,7 @@ namespace my_log {
     class Logger
     {
         private:
-            std::ostream& os_;
+            OutStream& os_;
             std::string& header_;
             Verbosity verbosity_;
             bool starts_new_line_;
@@ -104,8 +157,8 @@ namespace my_log {
             // that function (For std::ostream).
             using endl_type = std::ostream&(std::ostream&); 
 
-            Logger<V> () : os_(LoggerCtrl::get().get_os()),
-                           header_(LoggerCtrl::get().get_header()),
+            Logger<V> () : os_(LoggerCtrl::get_os()),
+                           header_(LoggerCtrl::get_header()),
                            verbosity_(V), 
                            starts_new_line_(true) {}
             Logger (const Logger& l) = delete;

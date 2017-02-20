@@ -18,10 +18,16 @@ int main (void)
     my_log::LoggerCtrl::set_max_verbosity(my_log::Verbosity::debug);
     my_log::LoggerCtrl::set_header("KKK: ");
 
+    ofstream ofs("Test.txt");
+
+    my_log::LoggerCtrl::add_stream(ofs);
+
     LOG << "HAHAHA" << endl;
     LOGE << "HAHAHA" << endl;
     LOGW << "HAHAHA" << endl;
     LOGI << "HAHAHA" << endl;
+
+    my_log::LoggerCtrl::set_max_verbosity(my_log::Verbosity::warning);
 
     LOGD << "HAHAHA" << endl;
     LOGD << "HAHAHA";
