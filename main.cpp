@@ -16,7 +16,6 @@ using namespace std;
 int main (void)
 {
     my_log::LoggerCtrl::set_max_verbosity(my_log::Verbosity::debug);
-    my_log::LoggerCtrl::set_header("KKK: ");
 
     ofstream ofs("Test.txt");
 
@@ -26,11 +25,14 @@ int main (void)
     LOGE << "HAHAHA" << endl;
     LOGW << "HAHAHA" << endl;
     LOGI << "HAHAHA" << endl;
+    LOGD << "HAHAHA" << endl;
 
+    my_log::LoggerCtrl::set_header("KKK2: ");
     my_log::LoggerCtrl::set_max_verbosity(my_log::Verbosity::warning);
 
-    LOGD << "HAHAHA" << endl;
-    LOGD << "HAHAHA";
-    LOGD << "HAHAHA";
+    LOG << "HAHAHA" << endl;
+    LOGE << "HAHAHA" << endl;
+    LOGW << "HAHAHA" << endl;
+    LOGI << "HAHAHA" << endl;
     LOGD << "HAHAHA" << endl;
 }

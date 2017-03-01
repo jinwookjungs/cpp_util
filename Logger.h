@@ -27,7 +27,8 @@
 #define LOGD my_log::Logger<my_log::Verbosity::debug>::get().set_file_string(my_log::FileString(__FILENAME__, __LINE__))
 
 
-namespace my_log {
+namespace my_log 
+{
 
     /**
      * Log verbosity.
@@ -44,7 +45,8 @@ namespace my_log {
         int line_num_;
 
         FileString() : file_name_(), line_num_() {}
-        FileString(std::string file_name, int line_num) : file_name_(file_name), line_num_(line_num) {}
+        FileString(std::string file_name, int line_num) : file_name_(file_name), 
+                                                          line_num_(line_num) {}
 
         friend std::ostream& operator<< (std::ostream& os, const FileString fs);
     };
