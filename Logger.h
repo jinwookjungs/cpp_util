@@ -1,7 +1,7 @@
 /**
  * @file    Logger.h
  * @author  Jinwook Jung (jinwookjungs@gmail.com)
- * @date    2017-02-20 01:07:43
+ * @date    2017-03-06 15:32:31
  *
  * Created on Sat Feb 18 20:07:06 2017.
  */
@@ -48,10 +48,10 @@ namespace my_log
         FileString(std::string file_name, int line_num) : file_name_(file_name), 
                                                           line_num_(line_num) {}
 
-        friend std::ostream& operator<< (std::ostream& os, const FileString fs);
+        friend std::ostream& operator<< (std::ostream& os, const FileString& fs);
     };
 
-    inline std::ostream& operator<< (std::ostream& os, const FileString fs)
+    inline std::ostream& operator<< (std::ostream& os, const FileString& fs)
     {   
         os << fs.file_name_ << ":" << fs.line_num_;
         return os;
