@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <string>
-#include "ArgParser.h"
 #include "Logger.h"
 
 using namespace std;
