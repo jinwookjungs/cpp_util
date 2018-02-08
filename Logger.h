@@ -235,7 +235,7 @@ public:
 };
 
 
-class LoggerVerbosityDebug
+struct LoggerVerbosityDebug
 {
     LoggerVerbosityDebug () {
         util::LoggerCtrl::set_max_verbosity(util::LogVerbosity::debug);
