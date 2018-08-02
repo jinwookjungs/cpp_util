@@ -63,8 +63,7 @@ inline std::ostream& operator<< (std::ostream& os, const FileString& fs)
 class OutStream : public std::ostream
 {
 private:
-    class StreamBuffer : public std::streambuf
-    {
+    class StreamBuffer : public std::streambuf {
     private:
         std::vector<std::streambuf*> bufs_;
     
@@ -72,24 +71,44 @@ private:
         void add_buffer (std::streambuf* buf) { 
             bufs_.push_back(buf); 
         }
-        virtual int overflow(int c)
-        {
-            std::for_each(bufs_.begin(), 
-                          bufs_.end(),
-                          std::bind2nd(std::mem_fun(&std::streambuf::sputc), c));
-            return c;
+
+        virtual int_type overflow (int_type c) {
+            bool success = true;
+
+            for (auto it = bufs_.begin(); it != bufs_.end(); ++it) {
+                if ((*it)->sputc(c) == traits_type::eof()) {
+                    success = false; 
+                }
+            }
+
+            if (success) {
+                return c;
+            }
+            else {
+                return traits_type::eof();
+            }
+        }
+
+        virtual int sync() {
+            int ret = 0;
+            for (auto it = bufs_.begin(); it != bufs_.end(); ++it) {
+                if ((*it)->pubsync() == -1) {
+                    ret = -1;
+                }
+            }
+
+            return ret;
         }
     };  
 
     StreamBuffer buffer_;
 
 public: 
-    OutStream() : std::ostream(NULL) { 
+    OutStream () : std::ostream(NULL) { 
         std::ostream::rdbuf(&buffer_); 
     }
 
-    void add_stream(std::ostream& os) 
-    {
+    void add_stream (std::ostream& os) {
         os.flush();
         buffer_.add_buffer(os.rdbuf());
     }
