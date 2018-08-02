@@ -1,0 +1,2 @@
+Mmain.cpp	./main.cpp	/^int main (void)$/
+ostream	./Logger.h	/^    typedef std::ostream&(endl_type)(std::ostream&/
