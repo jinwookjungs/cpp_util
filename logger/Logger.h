@@ -20,13 +20,13 @@
 // Logging macros
 //-----------------------------------------------------------------------------
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
-#define LOG  util::Logger<util::LogVerbosity::message>::get()
-#define LOGE util::Logger<util::LogVerbosity::error>::get()
-#define LOGW util::Logger<util::LogVerbosity::warning>::get()
-#define LOGI util::Logger<util::LogVerbosity::info>::get()
-#define LOGD util::Logger<util::LogVerbosity::debug>::get().set_file_string(util::FileString(__FILENAME__, __LINE__))
+#define LOG  my_log::Logger<my_log::LogVerbosity::message>::get()
+#define LOGE my_log::Logger<my_log::LogVerbosity::error>::get()
+#define LOGW my_log::Logger<my_log::LogVerbosity::warning>::get()
+#define LOGI my_log::Logger<my_log::LogVerbosity::info>::get()
+#define LOGD my_log::Logger<my_log::LogVerbosity::debug>::get().set_file_string(my_log::FileString(__FILENAME__, __LINE__))
 
-namespace util 
+namespace my_log 
 {
 
 /**
@@ -234,17 +234,6 @@ public:
     }
 };
 
-
-struct LoggerVerbosityDebug
-{
-    LoggerVerbosityDebug () {
-        util::LoggerCtrl::set_max_verbosity(util::LogVerbosity::debug);
-    }
-    ~LoggerVerbosityDebug () {
-        util::LoggerCtrl::reset_max_verbosity();
-    }
-};
-
-}   // End of namespace util
+}   // End of namespace my_log
 
 #endif 
