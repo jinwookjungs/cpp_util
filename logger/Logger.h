@@ -41,11 +41,11 @@ enum class LogVerbosity { message, error, warning, info, debug };
 struct FileString
 {
     std::string file_name_;
-    int line_num_;
+    uint32_t line_num_;
 
-    FileString() : file_name_(), line_num_() {}
-    FileString(std::string file_name, int line_num) : file_name_(file_name), 
-                                                      line_num_(line_num) {}
+    FileString () : file_name_(), line_num_() {}
+    FileString (std::string file_name, uint32_t line_num) : file_name_(file_name), 
+                                                       line_num_(line_num) {}
 
     friend std::ostream& operator<< (std::ostream& os, const FileString& fs);
 };
@@ -73,20 +73,15 @@ private:
         }
 
         virtual int_type overflow (int_type c) {
-            bool success = true;
+            bool returned_eof = true;
 
             for (auto it = bufs_.begin(); it != bufs_.end(); ++it) {
                 if ((*it)->sputc(c) == traits_type::eof()) {
-                    success = false; 
+                    returned_eof = false; 
                 }
             }
 
-            if (success) {
-                return c;
-            }
-            else {
-                return traits_type::eof();
-            }
+            return returned_eof ? traits_type::eof() : c;
         }
 
         virtual int sync() {
@@ -96,7 +91,6 @@ private:
                     ret = -1;
                 }
             }
-
             return ret;
         }
     };  
