@@ -1,2 +1,65 @@
-Mmain.cpp	./main.cpp	/^int main (void)$/
-ostream	./Logger.h	/^    typedef std::ostream&(endl_type)(std::ostream&/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+FileString	./Logger.h	/^    FileString () : file_name_(), line_num_() {}$/;"	f	struct:my_log::FileString
+FileString	./Logger.h	/^    FileString (std::string file_name, uint32_t line_num) : file_name_(file_name), $/;"	f	struct:my_log::FileString
+FileString	./Logger.h	/^struct FileString$/;"	s	namespace:my_log
+LOG	./Logger.h	/^#define LOG /;"	d
+LOGD	./Logger.h	/^#define LOGD /;"	d
+LOGE	./Logger.h	/^#define LOGE /;"	d
+LOGGER_H	./Logger.h	/^#define LOGGER_H /;"	d
+LOGI	./Logger.h	/^#define LOGI /;"	d
+LOGW	./Logger.h	/^#define LOGW /;"	d
+LogVerbosity	./Logger.h	/^enum class LogVerbosity { message, error, warning, info, debug };$/;"	c	namespace:my_log
+Logger	./Logger.h	/^    Logger<V> () : os_(LoggerCtrl::get_os()),$/;"	f	class:my_log::Logger
+Logger	./Logger.h	/^class Logger$/;"	c	namespace:my_log
+LoggerCtrl	./Logger.h	/^    LoggerCtrl() : os_(), header_(""), max_verbosity_(LogVerbosity::info) {$/;"	f	class:my_log::LoggerCtrl
+LoggerCtrl	./Logger.h	/^class LoggerCtrl $/;"	c	namespace:my_log
+OutStream	./Logger.h	/^    OutStream () : std::ostream(NULL) { $/;"	f	class:my_log::OutStream
+OutStream	./Logger.h	/^class OutStream : public std::ostream$/;"	c	namespace:my_log
+StreamBuffer	./Logger.h	/^    class StreamBuffer : public std::streambuf {$/;"	c	class:my_log::OutStream
+__FILENAME__	./Logger.h	/^#define __FILENAME__ /;"	d
+add_buffer	./Logger.h	/^        void add_buffer (std::streambuf* buf) { $/;"	f	class:my_log::OutStream::StreamBuffer
+add_stream	./Logger.h	/^    static void add_stream(std::ostream& os) {$/;"	f	class:my_log::LoggerCtrl
+add_stream	./Logger.h	/^    void add_stream (std::ostream& os) {$/;"	f	class:my_log::OutStream
+buffer_	./Logger.h	/^    StreamBuffer buffer_;$/;"	m	class:my_log::OutStream
+bufs_	./Logger.h	/^        std::vector<std::streambuf*> bufs_;$/;"	m	class:my_log::OutStream::StreamBuffer
+endl_type	./Logger.h	/^    typedef std::ostream&(endl_type)(std::ostream&);$/;"	t	class:my_log::Logger::std
+error	./Logger.h	/^enum class LogVerbosity { message, error, warning, info, debug };$/;"	m	class:my_log::LogVerbosity
+file_name_	./Logger.h	/^    std::string file_name_;$/;"	m	struct:my_log::FileString
+fs_	./Logger.h	/^    FileString fs_;$/;"	m	class:my_log::Logger
+get	./Logger.h	/^    static Logger<V>& get() {$/;"	f	class:my_log::Logger
+get	./Logger.h	/^    static LoggerCtrl& get() {$/;"	f	class:my_log::LoggerCtrl
+get_header	./Logger.h	/^    static std::string& get_header()      { return LoggerCtrl::get().header_; }$/;"	f	class:my_log::LoggerCtrl
+get_max_verbosity	./Logger.h	/^    static LogVerbosity& get_max_verbosity() { return LoggerCtrl::get().max_verbosity_; }$/;"	f	class:my_log::LoggerCtrl
+get_os	./Logger.h	/^    static OutStream& get_os()            { return LoggerCtrl::get().os_; }$/;"	f	class:my_log::LoggerCtrl
+get_verbosity_string	./Logger.h	/^    inline const std::string get_verbosity_string () {$/;"	f	class:my_log::Logger
+header_	./Logger.h	/^    std::string header_;$/;"	m	class:my_log::LoggerCtrl
+header_	./Logger.h	/^    std::string& header_;$/;"	m	class:my_log::Logger
+info	./Logger.h	/^enum class LogVerbosity { message, error, warning, info, debug };$/;"	m	class:my_log::LogVerbosity
+l	./Logger.h	/^    Logger (const Logger& l) = delete;$/;"	m	class:my_log::Logger
+l	./Logger.h	/^    Logger& operator= (const Logger& l) = delete;$/;"	m	class:my_log::Logger
+lc	./Logger.h	/^    LoggerCtrl& operator=(const LoggerCtrl& lc) = delete;$/;"	m	class:my_log::LoggerCtrl
+lc	./Logger.h	/^    LoggerCtrl(const LoggerCtrl& lc) = delete;$/;"	m	class:my_log::LoggerCtrl
+line_num_	./Logger.h	/^    uint32_t line_num_;$/;"	m	struct:my_log::FileString
+main	./main.cpp	/^int main (void)$/;"	f
+max_verbosity_	./Logger.h	/^    LogVerbosity max_verbosity_;$/;"	m	class:my_log::LoggerCtrl
+message	./Logger.h	/^enum class LogVerbosity { message, error, warning, info, debug };$/;"	m	class:my_log::LogVerbosity
+my_log	./Logger.h	/^namespace my_log $/;"	n
+operator <<	./Logger.h	/^    Logger<V>& operator<< (const T& data) {$/;"	f	class:my_log::Logger
+operator <<	./Logger.h	/^    Logger<V>& operator<<(endl_type endl) {$/;"	f	class:my_log::Logger
+operator <<	./Logger.h	/^inline std::ostream& operator<< (std::ostream& os, const FileString& fs)$/;"	f	namespace:my_log
+os_	./Logger.h	/^    OutStream os_;$/;"	m	class:my_log::LoggerCtrl
+os_	./Logger.h	/^    OutStream& os_;$/;"	m	class:my_log::Logger
+overflow	./Logger.h	/^        virtual int_type overflow (int_type c) {$/;"	f	class:my_log::OutStream::StreamBuffer
+reset_max_verbosity	./Logger.h	/^    static void reset_max_verbosity() {$/;"	f	class:my_log::LoggerCtrl
+set_file_string	./Logger.h	/^    Logger<V>& set_file_string (FileString fs) {$/;"	f	class:my_log::Logger
+set_header	./Logger.h	/^    static void set_header(std::string header) { $/;"	f	class:my_log::LoggerCtrl
+set_max_verbosity	./Logger.h	/^    static void set_max_verbosity(const LogVerbosity& v) {$/;"	f	class:my_log::LoggerCtrl
+starts_new_line_	./Logger.h	/^    bool starts_new_line_;$/;"	m	class:my_log::Logger
+sync	./Logger.h	/^        virtual int sync() {$/;"	f	class:my_log::OutStream::StreamBuffer
+verbosity_	./Logger.h	/^    LogVerbosity verbosity_;$/;"	m	class:my_log::Logger
+warning	./Logger.h	/^enum class LogVerbosity { message, error, warning, info, debug };$/;"	m	class:my_log::LogVerbosity

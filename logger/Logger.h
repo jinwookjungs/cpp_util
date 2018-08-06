@@ -73,11 +73,11 @@ private:
         }
 
         virtual int_type overflow (int_type c) {
-            bool returned_eof = true;
+            bool returned_eof = false;
 
             for (auto it = bufs_.begin(); it != bufs_.end(); ++it) {
                 if ((*it)->sputc(c) == traits_type::eof()) {
-                    returned_eof = false; 
+                    returned_eof = true; 
                 }
             }
 
